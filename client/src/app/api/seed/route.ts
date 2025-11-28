@@ -1,0 +1,9 @@
+import {
+    seedTransactions,
+} from "@/actions/seed";
+
+export async function GET() {
+    const result = await seedTransactions();
+    return new Response(JSON.stringify(result), {
+    });
+}
