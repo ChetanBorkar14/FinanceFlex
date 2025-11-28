@@ -24,7 +24,7 @@ export default async function DashboardPage() {
   }
 
   const supabase = createSupabaseClient(token);
-  
+
   // Fetch user
   const { data: user, error: userError } = await supabase
     .from("users")

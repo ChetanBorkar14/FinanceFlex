@@ -2,7 +2,8 @@ import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { createServiceSupabaseClient } from "@/lib/supabase/service-client";
 import { SESSION_COOKIE_NAME, verifySessionToken } from "@/lib/auth/session";
-import TransactionTable from "@/app/(main)/account/_components/transaction-table";
+import TransactionTable from "../_components/transaction-table";
+import TransactionChart from "../_components/transaction-chart";
 interface PageProps {
   params: Promise<{ id: string }>;
 }
@@ -32,6 +33,21 @@ export default async function AccountPage({ params }: PageProps) {
     .maybeSingle();
 
   if (!account) redirect("/not-found");
+
+  // Fetch all transactions for the chart and table
+  const { data: transactions, error: transactionsError } = await supabase
+    .from("transactions")
+    .select(
+      "id, description, category, type, amount, status, date, is_recurring"
+    )
+    .eq("account_id", accountId)
+    .order("date", { ascending: true });
+
+  if (transactionsError) {
+    console.error("Error fetching transactions:", transactionsError.message);
+  }
+
+  const transactionsData = transactions ?? [];
 
   return (
     <div className="space-y-8">
@@ -72,9 +88,14 @@ export default async function AccountPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* Transaction Chart */}
+      <div className="m-8  bg-background border-2 border-gray-200 dark:border-gray-950 rounded-xl shadow-md overflow-hidden">
+        <TransactionChart transactions={transactionsData} />
+      </div>
+
       {/* Transaction Table */}
-      <div className="m-8 p-8 bg-background border-2 border-gray-200 dark:border-gray-950 rounded-xl shadow-md overflow-hidden">
-        <TransactionTable accountId={accountId} />
+      <div className="m-8 p-2 pb-4 bg-background border-2 border-gray-200 dark:border-gray-950 rounded-xl shadow-md overflow-hidden">
+        <TransactionTable transactions={transactionsData} />
       </div>
     </div>
   );
