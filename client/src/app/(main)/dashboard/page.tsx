@@ -86,13 +86,15 @@ export default async function DashboardPage() {
           <div className="rounded-2xl border border-border bg-card/70 p-6 shadow-sm backdrop-blur md:col-span-3">
             <p className="text-sm text-muted-foreground">Total Balance</p>
             <p className="mt-3 text-4xl font-semibold">
-              ₹{totalBalance.toLocaleString("en-IN", {
+              ₹
+              {totalBalance.toLocaleString("en-IN", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Across {accountsList.length} account{accountsList.length !== 1 ? "s" : ""}
+              Across {accountsList.length} account
+              {accountsList.length !== 1 ? "s" : ""}
             </p>
           </div>
         </section>

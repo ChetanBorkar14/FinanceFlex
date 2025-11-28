@@ -24,9 +24,7 @@ export function CreateAccountForm() {
   }
 
   if (!isOpen) {
-    return (
-      <Button onClick={() => setIsOpen(true)}>Create Account</Button>
-    );
+    return <Button onClick={() => setIsOpen(true)}>Create Account</Button>;
   }
 
   return (
@@ -93,7 +91,9 @@ export function CreateAccountForm() {
           </label>
 
           {state?.error && (
-            <p className="text-sm font-medium text-destructive">{state.error}</p>
+            <p className="text-sm font-medium text-destructive">
+              {state.error}
+            </p>
           )}
 
           {state?.success && (
@@ -127,4 +127,3 @@ function SubmitButton() {
     </Button>
   );
 }
-

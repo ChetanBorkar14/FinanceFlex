@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
 
+import { useUser } from "@/app/hooks/useUser";
+
 export default function Header() {
   const navItems = [
     { name: "Features", link: "#features" },
@@ -20,6 +22,7 @@ export default function Header() {
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, displayName, isLoading } = useUser();
 
   return (
     <Navbar>
@@ -27,14 +30,23 @@ export default function Header() {
       <NavBody>
         <NavbarLogo />
         <NavItems items={navItems} />
+
         <div className="flex items-center gap-4">
-          <NavbarButton variant="secondary">Buy me a Coffee</NavbarButton>
-          <NavbarButton variant="primary" href="/login">
-            Login
-          </NavbarButton>
+          {isLoading ? (
+            <NavbarButton variant="secondary" className="cursor-default">
+              Loading...
+            </NavbarButton>
+          ) : user ? (
+            <NavbarButton variant="primary" href="/dashboard">
+              {displayName  }
+            </NavbarButton>
+          ) : (
+            <NavbarButton variant="primary" href="/login">
+              Login
+            </NavbarButton>
+          )}
         </div>
       </NavBody>
-
       {/* Mobile Navigation */}
       <MobileNav>
         <MobileNavHeader>
@@ -59,21 +71,35 @@ export default function Header() {
               <span className="block">{item.name}</span>
             </a>
           ))}
+
           <div className="flex w-full flex-col gap-4 mt-4">
-            <NavbarButton
-              onClick={() => setIsMobileMenuOpen(false)}
-              variant="primary"
-              className="w-full"
-            >
-              Login
-            </NavbarButton>
-            <NavbarButton
-              onClick={() => setIsMobileMenuOpen(false)}
-              variant="primary"
-              className="w-full"
-            >
-              Book a call
-            </NavbarButton>
+            {isLoading ? (
+              <NavbarButton
+                variant="secondary"
+                className="w-full cursor-default"
+                disabled
+              >
+                Loading...
+              </NavbarButton>
+            ) : user ? (
+              <NavbarButton
+                variant="primary"
+                className="w-full"
+                href="/dashboard"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {displayName}
+              </NavbarButton>
+            ) : (
+              <NavbarButton
+                variant="primary"
+                className="w-full"
+                href="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Login
+              </NavbarButton>
+            )}
           </div>
         </MobileNavMenu>
       </MobileNav>

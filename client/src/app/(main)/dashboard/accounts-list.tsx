@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { deleteAccount, toggleDefaultAccount } from "./actions";
 import { EditAccountForm } from "./edit-account-form";
@@ -92,12 +93,14 @@ export function AccountsList({ accounts }: AccountsListProps) {
             className="rounded-2xl border border-border bg-card/70 p-6 shadow-sm backdrop-blur"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg">{account.name}</h3>
+              <Link href={`/account/${account.id}`} className="flex-1">
+                <h3 className="font-semibold text-lg hover:text-primary transition-colors">
+                  {account.name}
+                </h3>
                 <p className="text-sm text-muted-foreground capitalize">
                   {account.type}
                 </p>
-              </div>
+              </Link>
               <button
                 onClick={() => handleToggleDefault(account.id)}
                 disabled={isToggling}
