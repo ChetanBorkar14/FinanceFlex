@@ -72,9 +72,11 @@ export default async function DashboardPage() {
               Signed in as <span className="font-medium">{user.email}</span>
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/dashboard/transaction/create">
-              <Button variant="outline">New Transaction</Button>
+          <div className="flex flex-wrap gap-3 ">
+            <Link href="/transaction/create">
+              <Button variant="outline" className="cursor-pointer">
+                New Transaction
+              </Button>
             </Link>
             <CreateAccountForm />
             <LogoutButton />

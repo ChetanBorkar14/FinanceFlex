@@ -91,7 +91,7 @@ export function EditAccountForm({
             name="is_default"
             value="true"
             defaultChecked={account.is_default}
-            className="size-4 rounded border-border"
+            className="size-4 rounded border-border accent-primary"
           />
           Set as default account
         </label>
@@ -125,4 +125,3 @@ function SubmitButton() {
     </Button>
   );
 }
-

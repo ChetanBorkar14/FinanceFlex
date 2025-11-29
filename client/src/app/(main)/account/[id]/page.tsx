@@ -61,9 +61,8 @@ export default async function AccountPage({ params }: PageProps) {
             {account.name}
           </p>
 
-          <p className="text-sm">
-            <span className="font-semibold text-muted-foreground">Type:</span>{" "}
-            {account.type}
+          <p className="text-sm capitalize text-foreground mb-2 font-semibold">
+            <span className="text-muted-foreground">Type:</span> {account.type}
           </p>
         </div>
 
@@ -71,11 +70,15 @@ export default async function AccountPage({ params }: PageProps) {
           <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-1">
             Balance
           </p>
-          <p className="text-3xl font-bold text-primary mb-2">
+          <p
+            className={`text-3xl font-semibold mb-4 ${
+              account.balance > 0 ? "text-primary" : "text-destructive"
+            }`}
+          >
             ₹{account.balance.toFixed(2)}
           </p>
 
-          <p className="text-sm font-bold text-foreground">
+          <p className="font-semibold text-muted-foreground">
             Default Account:{" "}
             <span
               className={`${
@@ -95,7 +98,10 @@ export default async function AccountPage({ params }: PageProps) {
 
       {/* Transaction Table */}
       <div className="m-8 p-2 pb-4 bg-background border-2 border-gray-200 dark:border-gray-950 rounded-xl shadow-md overflow-hidden">
-        <TransactionTable transactions={transactionsData} />
+        <TransactionTable
+          transactions={transactionsData}
+          accountId={accountId}
+        />
       </div>
     </div>
   );

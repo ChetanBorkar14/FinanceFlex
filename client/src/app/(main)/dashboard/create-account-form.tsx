@@ -24,7 +24,11 @@ export function CreateAccountForm() {
   }
 
   if (!isOpen) {
-    return <Button onClick={() => setIsOpen(true)}>Create Account</Button>;
+    return (
+      <Button onClick={() => setIsOpen(true)} className="cursor-pointer">
+        Create Account
+      </Button>
+    );
   }
 
   return (
@@ -34,7 +38,7 @@ export function CreateAccountForm() {
           <h2 className="text-xl font-semibold">Create New Account</h2>
           <button
             onClick={() => setIsOpen(false)}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground cursor-pointer"
           >
             ✕
           </button>
@@ -61,31 +65,34 @@ export function CreateAccountForm() {
             >
               <option value="">Select type</option>
               {accountTypes.map((type) => (
-                <option key={type} value={type}>
+                <option
+                  key={type}
+                  value={type}
+                  className="bg-background text-foreground dark:bg-background-dark dark:text-foreground-dark"
+                >
                   {type.charAt(0).toUpperCase() + type.slice(1)}
                 </option>
               ))}
             </select>
           </label>
 
-          <label className="flex flex-col gap-1 text-sm font-medium">
+            <label className="flex flex-col gap-1 text-sm font-medium">
             Initial Balance
             <input
               type="number"
               name="balance"
-              step="0.01"
               placeholder="0.00"
               required
               className="w-full rounded-xl border border-border bg-background/70 px-4 py-2 outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-          </label>
+            </label>
 
           <label className="flex items-center gap-2 text-sm">
             <input
               type="checkbox"
               name="is_default"
               value="true"
-              className="size-4 rounded border-border"
+              className="size-4 rounded border-border accent-primary"
             />
             Set as default account
           </label>
@@ -106,7 +113,7 @@ export function CreateAccountForm() {
             <Button
               type="button"
               variant="outline"
-              className="flex-1"
+              className="flex-1 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               Cancel
@@ -122,7 +129,7 @@ export function CreateAccountForm() {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" className="flex-1" disabled={pending}>
+    <Button type="submit" className="flex-1 cursor-pointer" disabled={pending}>
       {pending ? "Creating..." : "Create Account"}
     </Button>
   );

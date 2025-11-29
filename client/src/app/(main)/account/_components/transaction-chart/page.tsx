@@ -332,7 +332,7 @@ export default function TransactionBarChart({
                     : "text-orange-600 dark:text-orange-500"
                 }`}
               >
-                {currencyFormatter(Math.abs(netAmount))}
+                {currencyFormatter(netAmount)}
               </p>
             </div>
           </div>

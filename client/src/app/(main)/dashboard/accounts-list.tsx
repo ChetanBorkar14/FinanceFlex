@@ -94,7 +94,7 @@ export function AccountsList({ accounts }: AccountsListProps) {
           >
             <div className="flex items-start justify-between mb-4">
               <Link href={`/account/${account.id}`} className="flex-1">
-                <h3 className="font-semibold text-lg hover:text-primary transition-colors">
+                <h3 className="font-bold text-xl hover:text-primary transition-colors">
                   {account.name}
                 </h3>
                 <p className="text-sm text-muted-foreground capitalize">
@@ -105,10 +105,12 @@ export function AccountsList({ accounts }: AccountsListProps) {
                 onClick={() => handleToggleDefault(account.id)}
                 disabled={isToggling}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                  account.is_default
-                    ? "bg-primary"
-                    : "bg-muted"
-                } ${isToggling ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                  account.is_default ? "bg-primary" : "bg-muted"
+                } ${
+                  isToggling
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
+                }`}
                 title={account.is_default ? "Remove default" : "Set as default"}
               >
                 <span
@@ -121,8 +123,17 @@ export function AccountsList({ accounts }: AccountsListProps) {
 
             <div className="mb-4">
               <p className="text-sm text-muted-foreground">Balance</p>
-              <p className="text-2xl font-semibold mt-1">
-                ₹{balance.toLocaleString("en-IN", {
+              <p
+                className={`text-2xl font-semibold mt-1 ${
+                  balance > 0
+                    ? "text-green-600"
+                    : balance < 0
+                    ? "text-red-500"
+                    : "text-muted-foreground"
+                }`}
+              >
+                ₹
+                {balance.toLocaleString("en-IN", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -155,4 +166,3 @@ export function AccountsList({ accounts }: AccountsListProps) {
     </div>
   );
 }
-
