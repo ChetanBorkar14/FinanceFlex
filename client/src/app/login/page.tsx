@@ -5,10 +5,7 @@ import { useFormStatus } from "react-dom";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { loginAction, signupAction } from "./actions";
-import {
-  initialAuthState,
-  type AuthFormState,
-} from "./state";
+import { initialAuthState, type AuthFormState } from "./state";
 
 const signupBenefits = [
   "Secure account aggregation in seconds",
@@ -148,7 +145,7 @@ function SignupForm() {
           Full name
           <input
             type="text"
-            placeholder="Alex Morgan"
+            placeholder="Bruce Wayne"
             className={inputClasses}
             name="name"
             required

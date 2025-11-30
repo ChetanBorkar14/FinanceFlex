@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -43,6 +44,7 @@ export default function RootLayout({
         className={`${manrope.variable} antialiased bg-background text-foreground font-sans`}
       >
         <main className="min-h-screen bg-background">{children}</main>
+        <Analytics />
         <footer className="w-full border-t border-border py-6 flex flex-col items-center bg-background">
           <span className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} FinanceFlex. All rights reserved.
