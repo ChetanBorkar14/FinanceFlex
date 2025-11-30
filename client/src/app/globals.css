@@ -222,22 +222,23 @@
 
 @layer base {
   :root {
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
+    /* Supabase-style bright green + cool accents */
+    --chart-1: oklch(0.72 0.19 140); /* Primary Supabase green */
+    --chart-2: oklch(0.68 0.15 180); /* Teal */
+    --chart-3: oklch(0.6 0.12 220); /* Blue */
+    --chart-4: oklch(0.82 0.1 95); /* Yellow-green highlight */
+    --chart-5: oklch(0.55 0.07 255); /* Deep cool accent */
   }
 
   .dark {
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
+    /* Dark mode = darker background, neon-style accents */
+    --chart-1: oklch(0.6 0.2 140); /* Neon green */
+    --chart-2: oklch(0.58 0.16 180); /* Bright teal */
+    --chart-3: oklch(0.52 0.14 220); /* Blue highlight */
+    --chart-4: oklch(0.7 0.13 95); /* Lime accent */
+    --chart-5: oklch(0.45 0.1 255); /* Deep blue accent */
   }
 }
-
 
 body {
   letter-spacing: var(--tracking-normal);
